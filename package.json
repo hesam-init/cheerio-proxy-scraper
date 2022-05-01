@@ -1,5 +1,5 @@
 {
-  "name": "scraper",
+  "name": "proxy-scraper",
   "version": "1.0.0",
   "description": "Proxy Scraper",
   "main": "index.js",
