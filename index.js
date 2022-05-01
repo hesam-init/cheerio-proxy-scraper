@@ -1,9 +1,9 @@
 // Loading the dependencies. We don't need pretty
-// because we shall not log html to the terminal
-const cheerio = require("cheerio");
-const pretty = require("pretty");
-const axios = require("axios");
-const fs = require("fs");
+import cheerio from "cheerio";
+import pretty from "pretty";
+import colors from "colors";
+import axios from "axios";
+import fs from "fs";
 
 // create folder
 const dir = "./proxies";
@@ -52,7 +52,7 @@ const scrapeData = async () => {
           console.error(err);
           return;
         }
-        console.log("Successfully written data to file");
+        console.log("Successfully written proxies to json file" .green);
       }
     );
 
@@ -74,7 +74,7 @@ const scrapeData = async () => {
         console.error(err);
         return;
       }
-      console.log("Successfully written data to file");
+      console.log("Successfully written data proxies to txt file".green);
     });
   } catch (err) {
     console.error(err);
