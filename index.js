@@ -3,21 +3,24 @@ import cheerio from "cheerio";
 import pretty from "pretty";
 import colors from "colors";
 import axios from "axios";
+import ora from "ora";
 import fs from "fs";
+
+// progress bar animation
+const progressBar = ora("Scraping data from HMA");
 
 // create folder
 const dir = "./proxies";
-
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
 
 // scraper function
 const url = "https://hidemy.name/en/proxy-list/";
-const scrapeData = async () => {
-  try {
-    const { data } = await axios.get(url);
-    const $ = cheerio.load(data);
+
+const scrapeData = () => {
+  axios.get(url).then((data) => {
+    const $ = cheerio.load(data.data);
     const listItems = $(".table_block tbody");
 
     // We will store the data in this array
@@ -52,7 +55,7 @@ const scrapeData = async () => {
           console.error(err);
           return;
         }
-        console.log("Successfully written proxies to json file" .green);
+        console.log("Successfully written proxies to json file".green);
       }
     );
 
@@ -76,9 +79,8 @@ const scrapeData = async () => {
       }
       console.log("Successfully written data proxies to txt file".green);
     });
-  } catch (err) {
-    console.error(err);
-  }
+  });
 };
 
 scrapeData();
+
